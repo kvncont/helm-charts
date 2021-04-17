@@ -20,13 +20,13 @@ pipeline{
     stages{
         stage("Helm: Package"){
             steps{
+                // If you want to use helm push you need to install de push plugin
+                // helm plugin install https://github.com/chartmuseum/helm-push.git
                 sh '''
                     helm repo add ${REPOSITORY_NAME} ${REPOSITORY_URL}
                     helm repo update
                     helm search repo ${params.CHART_NAME}
                     helm package ./${params.CHART_NAME} --version ${params.CHART_VERSION} --app-version ${params.APP_VERSION}
-                    # If you want to use this line you need to install de push plugin
-                    # helm plugin install https://github.com/chartmuseum/helm-push.git
                     helm push ./${params.CHART_NAME}-${params.CHART_VERSION}.tgz ${REPOSITORY_NAME}
                     helm repo update
                     helm search repo ${params.CHART_NAME}
@@ -35,6 +35,7 @@ pipeline{
             post{
                 always{
                     echo "========always========"
+                    sh "rm *.tgz"
                 }
                 success{
                     echo "========A executed successfully========"
