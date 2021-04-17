@@ -7,7 +7,7 @@ pipeline{
         timestamps()
     }
     parameters{
-        choice(name: 'CHART_NAME', choices: ['hello-world', 'prometheus', 'report-service'], description: 'Pick the chart that you want to upgrade')
+        choice(name: "CHART_NAME", choices: ["hello-world", "prometheus", "report-service"], description: "Pick the chart that you want to upgrade")
         string(name: "CHART_VERSION", defaultValue: "", description: "This version number should be incremented each time you make changes. Versions are expected to follow Semantic Versioning 0.1.0 (https://semver.org/)")
         string(name: "APP_VERSION", defaultValue: "", description: "This is the version number of the application being deployed. This version number should be incremented each time you make changes to the application. They should reflect the version the application is using.")
         booleanParam(name: "DEPLOY", defaultValue: false, description: "Do you want to deploy the chart in the cluster k8s?")
@@ -20,7 +20,7 @@ pipeline{
     stages{
         stage("Helm: Package"){
             steps{
-                sh ''''
+                sh '''
                     helm repo add ${REPOSITORY_NAME} ${REPOSITORY_URL}
                     helm repo update
                     helm search repo ${params.CHART_NAME}
