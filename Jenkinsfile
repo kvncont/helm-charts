@@ -12,19 +12,11 @@ pipeline{
         choice(name: "ENVIRONMENT", choices: ["AKS_PRO_EastUS2", "AKS_PRO_CentralUS"], description: "Select the cluster that you want to deploy the app")
         booleanParam(name: "ROLLBACK", defaultValue: true, description: "Do you want to rollback in case of any error?")
     }
-    environment {
-        REPOSITORY_NAME = "kvncont-charts"
-        REPOSITORY_URL = "https://github.com/kvncont/helm-charts.git"
-    }
     stages{
         stage("Helm - Upgrade") {
             steps {
                 echo "Switch context"
                 echo "kubectl config use-context ${ENVIRONMENT}"
-                sh """
-                    helm repo add ${REPOSITORY_NAME} ${REPOSITORY_URL}
-                    helm repo update
-                """
                 echo "helm upgrade --install ${CHART_NAME} ${CHART_NAME} --namespace ${NAMESPACE}"
             }
         }
