@@ -9,7 +9,7 @@ pipeline{
     parameters {
         choice(name: "CHART_NAME", choices: ["hello-world", "prometheus", "report-service"], description: "Choice the chart that you want to upgrade")
         string(name: "NAMESPACE", defaultValue: "default", description: "Namespace")
-        choice(name: "ENVIRONMENT", choices: ["AKS_PRO_EastUS2", "AKS_PRO_CentralUS"], description: "Choice the region that you want to deploy de app")
+        choice(name: "ENVIRONMENT", choices: ["AKS_PRO_EastUS2", "AKS_PRO_CentralUS"], description: "Select the cluster that you want to deploy the app")
         booleanParam(name: "ROLLBACK", defaultValue: true, description: "Do you want to rollback in case of any error?")
     }
     environment {
