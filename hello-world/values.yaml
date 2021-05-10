@@ -8,7 +8,7 @@ image:
   repository: kvncont/hello-world
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "master.28.a6b0abbed24350e326ce6bbe563626dfe3c314be"
 
 imagePullSecrets: []
 nameOverride: ""
