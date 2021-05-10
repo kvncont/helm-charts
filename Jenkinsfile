@@ -27,7 +27,7 @@ pipeline{
             }
         }
         stage("Rollback") {
-            when { expression { params.ROLLBACK == "true" } }
+            when { expression { params.ROLLBACK == true } }
             steps {
                 echo "Executing rollback..."
             }
